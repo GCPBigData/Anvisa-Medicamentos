@@ -1,10 +1,10 @@
-name := "spark-streaming"
+name := "spark-ANVISA"
 
 version := "0.1"
 
 scalaVersion := "2.12.10"
 
-val sparkVersion = "3.0.0-preview"
+val sparkVersion = "3.0.0-preview2"
 val postgresVersion = "42.2.2"
 val cassandraConnectorVersion = "2.4.2"
 val akkaVersion = "2.5.24"
@@ -27,6 +27,7 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion,
   "org.apache.spark" %% "spark-sql" % sparkVersion,
+  "org.apache.spark" %% "spark-hive" % sparkVersion,
 
   // streaming
   "org.apache.spark" %% "spark-streaming" % sparkVersion,
@@ -55,3 +56,4 @@ libraryDependencies ++= Seq(
   //Zip
   "org.apache.commons" %% "commons-compress" % "1.18"
 )
+

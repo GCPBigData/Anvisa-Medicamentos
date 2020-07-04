@@ -1,4 +1,4 @@
-package sprints
+package base
 
 import org.apache.spark.{SparkContext, SparkConf}
 

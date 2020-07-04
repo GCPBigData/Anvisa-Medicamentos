@@ -1,7 +1,9 @@
 package parquet
 
-import org.apache.spark.sql.SparkSession
-import spark.sql
+import org.apache.log4j.Logger
+import org.apache.spark.sql.{DataFrame, Row, SaveMode, SparkSession}
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
 /**
  *
@@ -17,20 +19,22 @@ import spark.sql
  */
 object CriaTabelaSpark extends Serializable {
 
+  @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
+
   def main(args: Array[String]): Unit = {
 
     val ss = SparkSession.builder
-      .appName("CSV to Dataset")
+      .appName("Parquet to Table")
       .master("local[*]")
       .getOrCreate
 
     // Ler os arquivos parquetconvertidos
     val TA_PAF_ParquetDF = ss.read
         .format("parquet")
-        .option("path", "src\\main\\resources\\data\\TA_PAF\\TA_PAF.parquet")
+        .option("path", "D:\\data\\TA_PAF\\TA_PAF.parquet")
         .load()
 
-    // DDL para criação do banco de dados ANVISA
+        // DDL para criação do banco de dados ANVISA
     sql("CREATE DATABASE IF NOT EXISTS ANVISA")
     sql("USE ANVISA")
 
@@ -44,7 +48,7 @@ object CriaTabelaSpark extends Serializable {
     // Lista as Tabelas
     ss.catalog.listTables("ANVISA").show()
 
-    //por logger
+    logger.info("===========Finished=========")
     ss.stop()
   }
 }

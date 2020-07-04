@@ -1,0 +1,5 @@
+package parquet
+
+object ConsultaCNPJUDF {
+
+}

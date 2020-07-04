@@ -1,7 +1,9 @@
 package parquet
 
+import org.apache.log4j.Logger
 import org.apache.spark.sql.types.{DataType, DateType, IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.{SaveMode, SparkSession}
+import parquet.ConverteParquet.{getClass, logger}
 /**
  *
  * Converte CSV Parquet
@@ -14,7 +16,9 @@ import org.apache.spark.sql.{SaveMode, SparkSession}
  *
  * https://github.com/GCPBigData/Anvisa-Medicamentos
  */
-object ConverteParquet {
+object ConverteParquet extends Serializable {
+
+  @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
   def main(args: Array[String]): Unit = {
 
@@ -60,6 +64,8 @@ object ConverteParquet {
       .partitionBy( "NU_CNPJ_EMPRESA")
       .option("maxRecordsPerFile", 10000)
       .save()
+
+    logger.info("===========Finished=========")
     ss.stop()
   }
 }

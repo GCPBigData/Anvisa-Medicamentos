@@ -1,4 +1,4 @@
-package sprints
+package base
 
 import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.{HashPartitioner, SparkConf}
