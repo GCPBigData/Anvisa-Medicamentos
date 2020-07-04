@@ -60,7 +60,7 @@ object ConverteParquet_TA_PAF extends Serializable {
     TA_PAF_DF.write
       .format("parquet")
       .mode(SaveMode.Overwrite)
-      .option("encoding", "UTF-8")
+      .option("encoding", "windows-1252")
       .option("path", "D:\\data\\TA_PAF")
       //.partitionBy( "NU_CNPJ_EMPRESA")
       //.option("maxRecordsPerFile", 10000)
