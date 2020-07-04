@@ -3,14 +3,14 @@ package gov.anvisa.ler
 import org.apache.log4j.Logger
 import org.apache.spark.sql.SparkSession
 
-object LerParquet_TA_PAF extends Serializable {
+object LerTA_ORCAMENTO extends Serializable {
 
   @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
   def main(args: Array[String]): Unit = {
 
     val ss = SparkSession.builder
-      .appName("Ler Parquet")
+      .appName("Ler TA_ORCAMENTO")
       .master("local[*]")
       .getOrCreate
 
@@ -21,7 +21,7 @@ object LerParquet_TA_PAF extends Serializable {
       .option("sep", ";")
       .option("encoding", "UTF-8")
       .option("inferSchema","True")
-      .option("path","D:\\data\\TA_ORCAMENTO\\NU_ANO=2011\\*.parquet")
+      .option("path","D:\\data\\TA_ORCAMENTO\\NU_ANO=2017\\*.parquet")
       .load()
 
     TA_ORCAMENTO.show()

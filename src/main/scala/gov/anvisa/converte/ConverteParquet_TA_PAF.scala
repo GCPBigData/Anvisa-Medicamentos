@@ -1,5 +1,9 @@
 package gov.anvisa.converte
 
+import org.apache.log4j.Logger
+import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
+import org.apache.spark.sql.{SaveMode, SparkSession}
+
 /**
  *
  * Converte CSV Parquet
@@ -57,9 +61,9 @@ object ConverteParquet_TA_PAF extends Serializable {
       .format("parquet")
       .mode(SaveMode.Overwrite)
       .option("encoding", "UTF-8")
-      .option("path", "D:\\data\\TA_PAF\\parquet")
-      .partitionBy( "NU_CNPJ_EMPRESA")
-      .option("maxRecordsPerFile", 10000)
+      .option("path", "D:\\data\\TA_PAF")
+      //.partitionBy( "NU_CNPJ_EMPRESA")
+      //.option("maxRecordsPerFile", 10000)
       .save()
 
     logger.info("===========Finished=========")

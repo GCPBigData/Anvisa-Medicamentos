@@ -6,14 +6,14 @@ import org.apache.spark.sql.{SaveMode, SparkSession}
 /**
  *
  * Converte CSV Parquet
+ * Parquet Save.
  * fonte de dados : https://dados.anvisa.gov.br/dados/
- * Converte Todos os CSV para parquet, criando
  *
  * @author web2ajax@gmail.com - 02/07/2020
  *
  * https://github.com/GCPBigData/Anvisa-Medicamentos
  */
-object ConverteTA_ORCAMENTO extends Serializable {
+object ConverteTA_RESTRICAO_MEDICAMENTO extends Serializable {
 
   @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
@@ -25,26 +25,26 @@ object ConverteTA_ORCAMENTO extends Serializable {
       .getOrCreate
 
     //Abri o arquivo CSV
-    val TA_ORCAMENTO = ss.read
+    val TA_RESTRICAO_MEDICAMENTO = ss.read
       .format("csv")
       .option("header", "true")
       .option("sep", ";")
       .option("encoding", "windows-1252")
       .option("inferSchema","True")
-      .option("path","D:\\data\\TA_ORCAMENTO.csv")
+      .option("path","D:\\data\\TA_RESTRICAO_MEDICAMENTO.csv")
       .load()
 
-    // Converte TA_ORCAMENTO.csv para TA_PAF.parquet
-    TA_ORCAMENTO.write
+    // Converte TA_RESTRICAO_MEDICAMENTO.csv para TA_RESTRICAO_MEDICAMENTO.parquet
+    TA_RESTRICAO_MEDICAMENTO.write
       .format("parquet")
       .mode(SaveMode.Overwrite)
       .option("encoding", "UTF-8")
-      .option("path", "D:\\data\\TA_ORCAMENTO\\")
-      .partitionBy( "NU_ANO")
+      .option("path", "D:\\data\\TA_RESTRICAO_MEDICAMENTO\\")
+      .partitionBy( "DS_CATEGORIA_PRODUTO")
       .option("maxRecordsPerFile", 10000)
       .save()
 
-    TA_ORCAMENTO.show(1)
+    TA_RESTRICAO_MEDICAMENTO.show(1)
 
     logger.info("===========Finished=========")
     ss.stop()

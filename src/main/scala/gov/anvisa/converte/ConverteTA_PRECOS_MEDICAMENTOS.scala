@@ -13,19 +13,19 @@ import org.apache.spark.sql.{SaveMode, SparkSession}
  *
  * https://github.com/GCPBigData/Anvisa-Medicamentos
  */
-object ConverteTA_ORCAMENTO extends Serializable {
+object ConverteTA_PRECOS_MEDICAMENTOS extends Serializable {
 
   @transient lazy val logger: Logger = Logger.getLogger(getClass.getName)
 
   def main(args: Array[String]): Unit = {
 
     val ss = SparkSession.builder
-      .appName("CSV to Dataset")
+      .appName("CSV to TA_PRECOS_MEDICAMENTOS")
       .master("local[*]")
       .getOrCreate
 
     //Abri o arquivo CSV
-    val TA_ORCAMENTO = ss.read
+    val TA_PRECOS_MEDICAMENTOS = ss.read
       .format("csv")
       .option("header", "true")
       .option("sep", ";")
@@ -34,17 +34,15 @@ object ConverteTA_ORCAMENTO extends Serializable {
       .option("path","D:\\data\\TA_ORCAMENTO.csv")
       .load()
 
-    // Converte TA_ORCAMENTO.csv para TA_PAF.parquet
-    TA_ORCAMENTO.write
+    // Converte TA_PRECOS_MEDICAMENTOS.csv para TA_PRECOS_MEDICAMENTOS.parquet
+    TA_PRECOS_MEDICAMENTOS.write
       .format("parquet")
       .mode(SaveMode.Overwrite)
       .option("encoding", "UTF-8")
-      .option("path", "D:\\data\\TA_ORCAMENTO\\")
-      .partitionBy( "NU_ANO")
-      .option("maxRecordsPerFile", 10000)
+      .option("path", "D:\\data\\TA_PRECOS_MEDICAMENTOS\\")
       .save()
 
-    TA_ORCAMENTO.show(1)
+    TA_PRECOS_MEDICAMENTOS.show(1)
 
     logger.info("===========Finished=========")
     ss.stop()
