@@ -1,6 +1,5 @@
-package gov.anvisa
+package gov.anvisa.consulta
 
-import gov.anvisa.ConsultaCNPJSQL.{getClass, logger}
 import org.apache.log4j.Logger
 import org.apache.spark.sql.SparkSession
 

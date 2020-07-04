@@ -1,4 +1,4 @@
-package gov.anvisa
+package gov.anvisa.ler
 
 import org.apache.log4j.Logger
 import org.apache.spark.sql.SparkSession

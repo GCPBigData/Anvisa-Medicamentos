@@ -1,4 +1,4 @@
-package gov.anvisa
+package gov.anvisa.criaBanco
 
 import org.apache.log4j.Logger
 import org.apache.spark.sql.{SaveMode, SparkSession}

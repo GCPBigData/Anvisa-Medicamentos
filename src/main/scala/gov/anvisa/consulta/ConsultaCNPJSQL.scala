@@ -1,7 +1,7 @@
-package gov.anvisa
+package gov.anvisa.consulta
 
 import org.apache.log4j.Logger
-import org.apache.spark.sql.{SparkSession}
+import org.apache.spark.sql.SparkSession
 
 /**
  *
@@ -35,7 +35,7 @@ object ConsultaCNPJSQL extends Serializable {
     // Ler a View com SQL
     //val TA_PAF_DF_SQL = ss.sql("SELECT * FROM View_TA_PAF_DF")
     //TA_PAF_DF_SQL.show(10)
-    
+
     logger.info("===========Finished=========")
     ss.stop()
   }
